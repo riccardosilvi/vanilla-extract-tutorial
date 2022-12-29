@@ -1,5 +1,7 @@
-import { style } from "@vanilla-extract/css"
+import { style, styleVariants } from "@vanilla-extract/css"
 import { vars } from "../styles/theme.css"
+// Rest of styles...
+
 
 export const wrapper = style({
   fontFamily: vars.font.body,
@@ -45,3 +47,35 @@ export const button = style({
     },
   },
 })
+
+// creating base styles for variants is as simple as
+// 1. create a "base" styles rules set
+// 2. compose base styles with custom through styles variants
+const topBarHeadingBase = style({
+  fontSize: vars.fontSize.lg,
+  fontWeight: 700,
+})
+
+// you can compose styles by hardcoding each theme name
+export const topBarHeading = styleVariants({
+  light: [topBarHeadingBase, { color: `black` }],
+  dark: [topBarHeadingBase, { color: `white` }],
+})
+
+const footerBase = style({
+  fontSize: vars.fontSize.sm,
+  textAlign: `center`,
+  marginTop: vars.space.xl,
+})
+
+const footerColors = {
+  light: vars.colors.gray600,
+  dark: vars.colors.gray400,
+}
+
+// or through the map functionality
+// https://vanilla-extract.style/documentation/api/style-variants/#mapping-variants
+export const footer = styleVariants(footerColors, (color) => [
+  footerBase,
+  { color },
+])
