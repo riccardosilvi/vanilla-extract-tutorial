@@ -97,3 +97,61 @@ export const vars = createThemeContract({
     full: ``,
   },
 })
+
+// *** THEMES *** //
+
+// What replicates to every theme can be extracted in a simple object
+// that matches the contract structure partially
+const commonVars = {
+  font: {
+    body: SYSTEM_FONT_STACK,
+  },
+  space: {
+    xs: `0.25rem`,
+    sm: `0.5rem`,
+    md: `1rem`,
+    lg: `1.5rem`,
+    xl: `2.5rem`,
+  },
+  fontSize: {
+    xs: `0.8rem`,
+    sm: `0.875rem`,
+    md: `1rem`,
+    lg: `1.25rem`,
+    xl: `1.5rem`,
+  },
+  boxShadow: {
+    sm: `0 1px 2px 0 rgb(0 0 0 / 0.05)`,
+    md: `0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)`,
+    lg: `0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)`,
+  },
+  radii: {
+    sm: `0.2rem`,
+    md: `0.4rem`,
+    full: `100%`,
+  },
+}
+
+export const lightThemeClass = createTheme(vars, {
+  colors: {
+    primary: colors.blue500,
+    body: colors.gray700,
+    background: colors.gray100,
+    link: colors.blue800,
+    linkHover: colors.blue600,
+    ...colors,
+  },
+  ...commonVars
+})
+
+export const darkThemeClass = createTheme(vars, {
+  colors: {
+    primary: colors.blue400,
+    body: colors.gray300,
+    background: colors.gray800,
+    link: colors.blue200,
+    linkHover: colors.blue400,
+    ...colors,
+  },
+  ...commonVars
+})
