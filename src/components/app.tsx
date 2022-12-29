@@ -14,10 +14,14 @@ const App: React.FC = () => {
 
   return (
     <div className={clsx(schemeClass,styles.wrapper)}>
-      <main>
-        <div>
+      <main className={styles.innerWrapper}>
+        <div className={styles.topBar}>
           <div>Last 30 Days</div>
-          <button type="button" onClick={() => (variant === `default` ? setVariant(`invert`) : setVariant(`default`))}>
+          <button
+            type="button"
+            className={styles.button}
+            onClick={() => (variant === `default` ? setVariant(`invert`) : setVariant(`default`))}
+          >
             Toggle Variant
           </button>
         </div>
