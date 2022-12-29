@@ -1,4 +1,8 @@
 import * as React from "react"
+import { sprinkles as s } from "../styles/sprinkles.css"
+import { wrapper, toValue, arrowUp, arrowDown } from "./stats.css"
+import { clsx } from "clsx"
+
 
 interface IStatsItemProps {
   label: string
@@ -26,24 +30,50 @@ export const Trend: React.FC<{ percentage: number }> = ({ percentage }) => {
 
   return (
     <div>
-      <span />
-      <span>{Math.abs(percentage)}%</span>
+      <span className={isPositive ? arrowUp : arrowDown} />
+      <span className={s({ marginLeft: `xs` })}>{Math.abs(percentage)}%</span>
     </div>
   )
 }
 
-export const StatsItem: React.FC<IStatsItemProps> = ({ label, from, to, percentage }) => {
+export const StatsItem: React.FC<IStatsItemProps> = ({
+  label,
+  from,
+  to,
+  percentage,
+}) => {
   const variant = React.useContext(StatsContext)
 
   return (
-    <div>
-      <div>{label}</div>
-      <div>
-        <div>
-          <span>{to.toFixed(2)}%</span>
+    <div className={wrapper[variant]}>
+      <div className={s({ fontWeight: 600 })}>{label}</div>
+      <div
+        className={s({
+          display: `flex`,
+          alignItems: `center`,
+          justifyContent: `space-between`,
+          marginTop: `md`,
+        })}
+      >
+        <div className={s({ display: `flex`, alignItems: `baseline` })}>
+          <span
+            className={clsx([
+              s({
+                fontSize: `xl`,
+                fontWeight: 600,
+                marginRight: `sm`,
+                lineHeight: `xl`,
+              }),
+              toValue[variant],
+            ])}
+          >
+            {to.toFixed(2)}%
+          </span>
           {` `}
           from{` `}
-          <span>{from.toFixed(2)}%</span>
+          <span className={s({ marginLeft: `sm`, fontWeight: 500 })}>
+            {from.toFixed(2)}%
+          </span>
         </div>
         <Trend percentage={percentage} />
       </div>
